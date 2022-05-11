@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">NMedia1.0</string>
+    <string name="title_logo" translatable="false">Нетология. Университет интернет-профессий для будущего.</string>
+    <string name="data_logo" translatable="false">21 мая в 21:09</string>
+    <string name="menu_logo" translatable="false">menu</string>
+    <string name="text_content" translatable="false">Как сдавать задачиОткройте ваш проект с предыдущего ДЗ Сделайте необходимые коммитыСделайте пуш (удостоверьтесь, что ваш код появился на GitHub) Ссылку на ваш проект отправьте в личном кабинете на сайте netology. Задачи, отмеченные, как необязательные, можно не сдавать, это не повлияет на получение зачета (в этом ДЗ все задачи являются обязательными)</string>
+    <string name="number_test" translatable="false">12</string>
+    <string name="image" translatable="false">image</string>
 </resources>
