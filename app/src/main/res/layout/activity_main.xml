@@ -152,5 +152,4 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivViews"
         tools:text="@string/number_test" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
