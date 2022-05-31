@@ -2,7 +2,9 @@ package applicationld.ru.netology.nmedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import applicationld.ru.netology.nmedia.databinding.ActivityMainBinding
+import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -14,53 +16,28 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Привет, это новая Нетология!",
-            published = "21 мая в 21:00",
-            likeByMe = false,
-            likeByMeCount = 999,
-            shareByMeCount = 1999
-        )
+        val viewModel by viewModels<PostViewModel>()
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                titleHeader.text = post.author
+                dataHeader.text = post.published
+                textContent.text = post.content
 
-        with(binding) {
-            titleHeader.text = post.author
-            dataHeader.text = post.published
-            textContent.text = post.content
+                txLike.text = countString(post.likeByMeCount)
+                txShare.text = countString(post.shareByMeCount)
 
-            var countLike = post.likeByMeCount
-            txLike.text = countString(countLike)
-
-            var countShare = post.shareByMeCount
-            txShare.text = countString(countShare)
-
-            if (post.likeByMe) {
-                ibLike.setImageResource(R.drawable.ic_like_on_24)
-            }
-
-            ibLike.setOnClickListener {
-                post.likeByMe = !post.likeByMe
                 ibLike.setImageResource(
-                    if (post.likeByMe) {
-                        R.drawable.ic_like_on_24
-                    } else {
-                        R.drawable.ic_like_border_24
-                    }
+                    if (post.likeByMe) R.drawable.ic_like_on_24 else R.drawable.ic_like_border_24
                 )
 
-                if (post.likeByMe) {
-                    countLike++
-                } else {
-                    countLike--
+                ibLike.setOnClickListener {
+                    viewModel.onLikeClicked()
                 }
-                txLike.text = countString(countLike)
-            }
 
-            ibShare.setOnClickListener {
-                txShare.text = countString(countShare++)
+                ibShare.setOnClickListener {
+                    viewModel.onShareClicked()
+                }
             }
-
         }
     }
 
