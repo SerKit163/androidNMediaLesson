@@ -1,155 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iconHeader"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/barrierHeader"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginBottom="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_netology"
-        android:contentDescription="@string/image" />
-
-    <TextView
-        android:id="@+id/titleHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintStart_toEndOf="@+id/iconHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/dataHeader"
-        app:layout_constraintEnd_toStartOf="@id/menuHeader"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginEnd="@dimen/common_spacing"
-        tools:text="@string/title_logo" />
-
-    <TextView
-        android:id="@+id/dataHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:layout_marginBottom="@dimen/common_spacing"
-        app:layout_constraintStart_toEndOf="@+id/iconHeader"
-        app:layout_constraintTop_toBottomOf="@+id/titleHeader"
-        app:layout_constraintBottom_toTopOf="@+id/barrierHeader"
-        tools:text="@string/data_logo" />
-
-    <ImageButton
-        android:id="@+id/menuHeader"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/barrierHeader"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/common_spacing"
-        android:layout_marginBottom="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_menu_24"
-        android:contentDescription="@string/menu_logo" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="dataHeader, iconHeader, menuHeader"/>
-
-    <TextView
-        android:id="@+id/textContent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/common_spacing"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrierHeader"
-        app:layout_constraintBottom_toTopOf="@+id/barrierFooter"
-        tools:text="@string/text_content" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierFooter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="ibLike,txLike, ibShare, txShare, ibViews, txViews"
-        app:barrierDirection="top" />
-
-    <ImageButton
-        android:id="@+id/ibLike"
-        android:layout_width="@dimen/icon_size_content"
-        android:layout_height="@dimen/icon_size_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginStart="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_like_border_24"
-        android:contentDescription="@string/image" />
-
-    <TextView
-        android:id="@+id/txLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/ibLike"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginStart="@dimen/margin_icon_number"
-        app:layout_constraintTop_toTopOf="@+id/ibLike"
-        app:layout_constraintBottom_toBottomOf="@+id/ibLike"
-        tools:text="@string/number_test" />
-
-    <ImageButton
-        android:id="@+id/ibShare"
-        android:layout_width="@dimen/icon_size_content"
-        android:layout_height="@dimen/icon_size_content"
-        app:layout_constraintStart_toEndOf="@id/txLike"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginStart="@dimen/common_spacing"
-        app:srcCompat="@drawable/ic_baseline_share_24"
-        android:contentDescription="@string/image" />
-
-    <TextView
-        android:id="@+id/txShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/ibShare"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginStart="@dimen/margin_icon_number"
-        app:layout_constraintTop_toTopOf="@+id/ibShare"
-        app:layout_constraintBottom_toBottomOf="@+id/ibShare"
-        tools:text="@string/number_test" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/post_card" />
 
 
-    <ImageButton
-        android:id="@+id/ibViews"
-        android:layout_width="@dimen/icon_size_content"
-        android:layout_height="@dimen/icon_size_content"
-        app:layout_constraintEnd_toStartOf="@id/txViews"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginEnd="@dimen/margin_icon_number"
-        app:srcCompat="@drawable/ic_baseline_visibility_24"
-        android:contentDescription="@string/image" />
-
-    <TextView
-        android:id="@+id/txViews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrierFooter"
-        android:layout_marginEnd="@dimen/common_spacing"
-        app:layout_constraintTop_toTopOf="@+id/ibViews"
-        app:layout_constraintBottom_toBottomOf="@+id/ibViews"
-        tools:text="@string/number_test" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
