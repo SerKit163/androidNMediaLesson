@@ -6,11 +6,16 @@ import applicationld.ru.netology.nmedia.Post
 
 class PostRepositoryInMemoryImpl: PostRepository {
 
-    private val post: Post get() = checkNotNull(data.value) {
-        "data.value null"
-    }
-
-    override val data = MutableLiveData(
+    private var posts = listOf(
+        Post(
+            id = 2,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология!",
+            published = "30 мая в 10:34",
+            likeByMe = false,
+            likeByMeCount = 0,
+            shareByMeCount = 0
+        ),
         Post(
             id = 1,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -22,18 +27,59 @@ class PostRepositoryInMemoryImpl: PostRepository {
         )
     )
 
-    override fun like() {
-        val post = post
-        data.value = post.copy(
-            likeByMeCount = if (post.likeByMe) post.likeByMeCount - 1 else post.likeByMeCount + 1,
-            likeByMe = !post.likeByMe
-        )
+    private val data = MutableLiveData(posts)
+
+    override fun getAll(): LiveData<List<Post>> = data
+
+    override fun likeById(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else it.copy(
+                likeByMeCount = if (it.likeByMe) it.likeByMeCount - 1 else it.likeByMeCount + 1,
+                likeByMe = !it.likeByMe
+            )
+        }
+        data.value = posts
     }
 
-    override fun share() {
-        val post = post
-        data.value = post.copy(
-            shareByMeCount = post.shareByMeCount + 1
-        )
+    override fun shareById(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else it.copy(
+                shareByMeCount = it.shareByMeCount + 1
+            )
+        }
+        data.value = posts
     }
+
+
+
+//    private val post: Post get() = checkNotNull(data.value) {
+//        "data.value null"
+//    }
+
+//    override val data = MutableLiveData(
+//        Post(
+//            id = 1,
+//            author = "Нетология. Университет интернет-профессий будущего",
+//            content = "Привет, это новая Нетология!",
+//            published = "21 мая в 21:00",
+//            likeByMe = false,
+//            likeByMeCount = 999,
+//            shareByMeCount = 1098
+//        )
+//    )
+//
+//    override fun like() {
+//        val post = post
+//        data.value = post.copy(
+//            likeByMeCount = if (post.likeByMe) post.likeByMeCount - 1 else post.likeByMeCount + 1,
+//            likeByMe = !post.likeByMe
+//        )
+//    }
+
+//    override fun share() {
+//        val post = post
+//        data.value = post.copy(
+//            shareByMeCount = post.shareByMeCount + 1
+//        )
+//    }
 }
