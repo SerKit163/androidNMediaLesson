@@ -26,14 +26,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintStart_toEndOf="@+id/iconHeader"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/light_sea_green"
         app:layout_constraintBottom_toTopOf="@+id/dataHeader"
         app:layout_constraintEnd_toStartOf="@id/menuHeader"
+        app:layout_constraintStart_toEndOf="@+id/iconHeader"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginEnd="@dimen/common_spacing"
         tools:text="@string/title_logo" />
 
     <TextView

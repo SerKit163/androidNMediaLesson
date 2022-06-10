@@ -3,7 +3,7 @@ package applicationld.ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import applicationld.ru.netology.nmedia.Post
+import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.databinding.PostCardBinding
 
 class PostsAdapter(

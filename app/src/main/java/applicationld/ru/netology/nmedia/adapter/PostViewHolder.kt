@@ -1,7 +1,9 @@
 package applicationld.ru.netology.nmedia.adapter
 
+import android.view.View
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import applicationld.ru.netology.nmedia.Post
+import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.R
 import applicationld.ru.netology.nmedia.databinding.PostCardBinding
 import java.math.RoundingMode
@@ -11,6 +13,7 @@ class PostViewHolder(
     private val binding: PostCardBinding,
     private val onClickMainListener: OnClickMainListener
 ) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(post: Post) {
         binding.apply {
             titleHeader.text = post.author
@@ -25,12 +28,32 @@ class PostViewHolder(
             )
 
             ibLike.setOnClickListener {
-                onClickMainListener.onLiked(post.id)
+                onClickMainListener.onLike(post)
             }
 
             ibShare.setOnClickListener {
-                onClickMainListener.onShared(post.id)
+                onClickMainListener.onShare(post)
             }
+
+            menuHeader.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onClickMainListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onClickMainListener.onEdit(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
+
         }
     }
 

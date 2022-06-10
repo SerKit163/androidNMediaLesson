@@ -2,7 +2,6 @@ package applicationld.ru.netology.nmedia.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import applicationld.ru.netology.nmedia.Post
 
 class PostRepositoryInMemoryImpl: PostRepository {
 
@@ -47,6 +46,35 @@ class PostRepositoryInMemoryImpl: PostRepository {
                 shareByMeCount = it.shareByMeCount + 1
             )
         }
+        data.value = posts
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id }
+//        posts = posts.map {
+//            if (it.id != id) it else it.copy(content = id.toString())
+//        }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+
+        // Добавление нового поста
+        if (post.id == 0L) {
+            posts = listOf(
+                post.copy(
+                    id = (posts.firstOrNull()?.id ?: 0L) + 1
+                )
+            ) + posts
+            data.value = posts
+            return
+        }
+
+        // Обновление поста
+        posts = posts.map {
+            if (it.id == post.id) it.copy(content = post.content) else it
+        }
+
         data.value = posts
     }
 }
