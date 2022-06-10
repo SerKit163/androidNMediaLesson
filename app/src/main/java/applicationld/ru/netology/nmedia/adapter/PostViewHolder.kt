@@ -20,12 +20,14 @@ class PostViewHolder(
             dataHeader.text = post.published
             textContent.text = post.content
 
-            txLike.text = countString(post.likeByMeCount)
-            txShare.text = countString(post.shareByMeCount)
+            ibLike.text = countString(post.likeByMeCount)
+            ibShare.text = countString(post.shareByMeCount)
 
-            ibLike.setImageResource(
-                if (post.likeByMe) R.drawable.ic_like_on_24 else R.drawable.ic_like_border_24
-            )
+            ibLike.isChecked = post.likeByMe
+
+//            ibLike.setImageResource(
+//                if (post.likeByMe) R.drawable.ic_like_on_24 else R.drawable.ic_like_border_24
+//            )
 
             ibLike.setOnClickListener {
                 onClickMainListener.onLike(post)

@@ -13,4 +13,6 @@
     <string name="close" translatable="false">close</string>
     <string name="edit" translatable="false">Edit</string>
     <string name="edit_message" translatable="false">Edit Message</string>
+    <string name="like" translatable="false">Like</string>
+    <string name="share" translatable="false">Share</string>
 </resources>

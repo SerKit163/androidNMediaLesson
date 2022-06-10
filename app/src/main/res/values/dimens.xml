@@ -6,4 +6,5 @@
     <dimen name="margin_icon_number">8dp</dimen>
     <dimen name="padding_edit_form_img">10dp</dimen>
     <dimen name="padding_edit_form">2dp</dimen>
+    <dimen name="icon_button_min_size">48dp</dimen>
 </resources>
