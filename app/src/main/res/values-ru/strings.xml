@@ -8,4 +8,9 @@
     <string name="edit_message">Изменить сообщение</string>
     <string name="error_edit">Содержимое не может быть пустым</string>
     <string name="choose_share_post">Поделиться постом</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="add">Добавить</string>
+    <string name="new_post">Новый пост</string>
+    <string name="edit_post">Редактировать пост</string>
+    <string name="enter_video">Введите ссылку для видео</string>
 </resources>

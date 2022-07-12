@@ -17,9 +17,9 @@
     <string name="share">Share</string>
     <string name="choose_share_post">Choose share post</string>
     <string name="blank_message_error" translatable="false">Ошибка получения!</string>
-    <string name="enter_text">Введите текст</string>
-    <string name="add">Добавить</string>
-    <string name="new_post">Новый пост</string>
-    <string name="edit_post">Редактировать пост</string>
-    <string name="enter_video">Введите ссылку на видео</string>
+    <string name="enter_text">Enter Text</string>
+    <string name="add">Add</string>
+    <string name="new_post">New Post</string>
+    <string name="edit_post">Edit Post</string>
+    <string name="enter_video">Enter link for video</string>
 </resources>
