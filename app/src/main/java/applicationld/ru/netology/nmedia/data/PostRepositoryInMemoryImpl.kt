@@ -13,7 +13,8 @@ class PostRepositoryInMemoryImpl: PostRepository {
             published = "30 мая в 10:34",
             likeByMe = false,
             likeByMeCount = 0,
-            shareByMeCount = 0
+            shareByMeCount = 0,
+            video = "https://www.youtube.com/watch?v=JC5Qch9VTQ4"
         ),
         Post(
             id = 1,
@@ -22,7 +23,8 @@ class PostRepositoryInMemoryImpl: PostRepository {
             published = "21 мая в 21:00",
             likeByMe = false,
             likeByMeCount = 999,
-            shareByMeCount = 1098
+            shareByMeCount = 1098,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         )
     )
 
@@ -51,15 +53,12 @@ class PostRepositoryInMemoryImpl: PostRepository {
 
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }
-//        posts = posts.map {
-//            if (it.id != id) it else it.copy(content = id.toString())
-//        }
         data.value = posts
     }
 
     override fun save(post: Post) {
 
-        // Добавление нового поста
+//        // Добавление нового поста
         if (post.id == 0L) {
             posts = listOf(
                 post.copy(
@@ -72,7 +71,10 @@ class PostRepositoryInMemoryImpl: PostRepository {
 
         // Обновление поста
         posts = posts.map {
-            if (it.id == post.id) it.copy(content = post.content) else it
+            if (it.id == post.id) it.copy(
+                content = post.content,
+                video = post.video
+            ) else it
         }
 
         data.value = posts

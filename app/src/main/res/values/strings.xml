@@ -9,10 +9,17 @@
     <string name="remove">Remove</string>
     <string name="post_text" translatable="false">Post Text</string>
     <string name="send" translatable="false">send</string>
-    <string name="error_edit" translatable="false">Content can`t be empty</string>
-    <string name="close" translatable="false">close</string>
-    <string name="edit" translatable="false">Edit</string>
-    <string name="edit_message" translatable="false">Edit Message</string>
+    <string name="error_edit">Content can`t be empty</string>
+    <string name="close">close</string>
+    <string name="edit">Edit</string>
+    <string name="edit_message">Edit Message</string>
     <string name="like" translatable="false">Like</string>
-    <string name="share" translatable="false">Share</string>
+    <string name="share">Share</string>
+    <string name="choose_share_post">Choose share post</string>
+    <string name="blank_message_error" translatable="false">Ошибка получения!</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="add">Добавить</string>
+    <string name="new_post">Новый пост</string>
+    <string name="edit_post">Редактировать пост</string>
+    <string name="enter_video">Введите ссылку на видео</string>
 </resources>

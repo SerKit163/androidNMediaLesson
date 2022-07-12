@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/common_spacing"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <ImageView
         android:id="@+id/iconHeader"
@@ -68,6 +68,43 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="dataHeader, iconHeader, menuHeader"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/videoGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="ibVideo, ibVideoIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrierHeader"
+        app:layout_constraintBottom_toTopOf="@+id/textContent"/>
+
+
+    <ImageButton
+        android:id="@+id/ibVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_video"
+        app:layout_constraintBottom_toTopOf="@+id/textContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrierHeader" />
+
+    <ImageButton
+        android:id="@+id/ibVideoIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_play_circle_outline_48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrierHeader"
+        app:layout_constraintBottom_toTopOf="@+id/textContent" />
+
+
     <TextView
         android:id="@+id/textContent"
         android:layout_width="0dp"
@@ -75,7 +112,7 @@
         android:layout_margin="@dimen/common_spacing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrierHeader"
+        app:layout_constraintTop_toBottomOf="@+id/ibVideo"
         app:layout_constraintBottom_toTopOf="@+id/barrierFooter"
         tools:text="@string/text_content" />
 

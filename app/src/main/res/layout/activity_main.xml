@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -14,104 +14,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/barrierEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/post_card" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierEdit"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="viewEditText, closeEdit"/>
-
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupViewEdit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:constraint_referenced_ids="iconEdit, viewEditTextHeader, viewEditText, closeEdit" />
-
-    <ImageView
-        android:id="@+id/iconEdit"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_edit_32"
-        android:padding="@dimen/padding_edit_form_img"
-        app:layout_constraintBottom_toBottomOf="@id/barrierEditCancle"
-        android:contentDescription="@string/edit"/>
-
-    <TextView
-        android:id="@+id/viewEditTextHeader"
-        android:layout_width="0dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddMain"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_edit_form"
-        android:text="@string/edit_message"
-        android:textColor="@color/light_sea_green"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/viewEditText"
-        app:layout_constraintEnd_toStartOf="@+id/closeEdit"
-        app:layout_constraintStart_toEndOf="@id/iconEdit" />
-
-    <TextView
-        android:id="@+id/viewEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_edit_form"
-        android:ellipsize="end"
-        android:maxLines="1"
-        app:layout_constraintStart_toEndOf="@id/iconEdit"
-        app:layout_constraintEnd_toStartOf="@+id/closeEdit"
-        app:layout_constraintBottom_toTopOf="@id/barrierEditCancle"/>
-
-    <ImageButton
-        android:id="@+id/closeEdit"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_close_32"
-        android:padding="@dimen/common_spacing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/barrierEditCancle"
-        android:contentDescription="@string/close"/>
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrierEditCancle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="content, save"/>
-
-    <EditText
-        android:id="@+id/content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/post_text"
-        android:inputType="textMultiLine"
-        android:background="@android:color/transparent"
-        android:padding="@dimen/common_spacing"
-        android:maxLines="10"
-        android:importantForAutofill="no"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save" >
-
-        <requestFocus />
-
-    </EditText>
-
-
-    <ImageButton
-        android:id="@+id/save"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_check_circle_32"
-        android:padding="@dimen/common_spacing"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/send"/>
+        app:srcCompat="@drawable/ic_add_32"/>
+
+<!--    <androidx.constraintlayout.widget.Barrier-->
+<!--        android:id="@+id/barrierEdit"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:barrierDirection="top"-->
+<!--        app:constraint_referenced_ids="viewEditText, closeEdit"/>-->
+
+
+<!--    <androidx.constraintlayout.widget.Group-->
+<!--        android:id="@+id/groupViewEdit"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"-->
+<!--        app:constraint_referenced_ids="iconEdit, viewEditTextHeader, viewEditText, closeEdit" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/iconEdit"-->
+<!--        android:layout_width="@dimen/icon_size"-->
+<!--        android:layout_height="@dimen/icon_size"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_edit_32"-->
+<!--        android:padding="@dimen/padding_edit_form_img"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/barrierEditCancle"-->
+<!--        android:contentDescription="@string/edit"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/viewEditTextHeader"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="@dimen/padding_edit_form"-->
+<!--        android:text="@string/edit_message"-->
+<!--        android:textColor="@color/light_sea_green"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/viewEditText"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/closeEdit"-->
+<!--        app:layout_constraintStart_toEndOf="@id/iconEdit" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/viewEditText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="@dimen/padding_edit_form"-->
+<!--        android:ellipsize="end"-->
+<!--        android:maxLines="1"-->
+<!--        app:layout_constraintStart_toEndOf="@id/iconEdit"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/closeEdit"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/barrierEditCancle"/>-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/closeEdit"-->
+<!--        android:layout_width="@dimen/icon_size"-->
+<!--        android:layout_height="@dimen/icon_size"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_close_32"-->
+<!--        android:padding="@dimen/common_spacing"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/barrierEditCancle"-->
+<!--        android:contentDescription="@string/close"/>-->
+
+<!--    <androidx.constraintlayout.widget.Barrier-->
+<!--        android:id="@+id/barrierEditCancle"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:barrierDirection="top"-->
+<!--        app:constraint_referenced_ids="content, save"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/content"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/post_text"-->
+<!--        android:inputType="textMultiLine"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:padding="@dimen/common_spacing"-->
+<!--        android:maxLines="10"-->
+<!--        android:importantForAutofill="no"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/save" >-->
+
+<!--        <requestFocus />-->
+
+<!--    </EditText>-->
+
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/save"-->
+<!--        android:layout_width="@dimen/icon_size"-->
+<!--        android:layout_height="@dimen/icon_size"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:src="@drawable/ic_check_circle_32"-->
+<!--        android:padding="@dimen/common_spacing"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:contentDescription="@string/send"/>-->
 
 
 

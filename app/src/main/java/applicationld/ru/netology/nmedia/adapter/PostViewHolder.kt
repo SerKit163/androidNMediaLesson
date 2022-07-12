@@ -2,10 +2,12 @@ package applicationld.ru.netology.nmedia.adapter
 
 import android.view.View
 import android.widget.PopupMenu
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.R
 import applicationld.ru.netology.nmedia.databinding.PostCardBinding
+import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -29,12 +31,24 @@ class PostViewHolder(
 //                if (post.likeByMe) R.drawable.ic_like_on_24 else R.drawable.ic_like_border_24
 //            )
 
+            if (!post.video.isNullOrBlank()) {
+                videoGroup.visibility = View.VISIBLE
+            }
+
             ibLike.setOnClickListener {
                 onClickMainListener.onLike(post)
             }
 
             ibShare.setOnClickListener {
                 onClickMainListener.onShare(post)
+            }
+
+            ibVideo.setOnClickListener {
+                onClickMainListener.onVideo(post)
+            }
+
+            ibVideoIcon.setOnClickListener {
+                onClickMainListener.onVideo(post)
             }
 
             menuHeader.setOnClickListener {

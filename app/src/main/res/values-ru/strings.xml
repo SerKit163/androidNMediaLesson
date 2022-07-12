@@ -2,4 +2,10 @@
 <resources>
     <string name="app_name">HMедиа1.0</string>
     <string name="remove">Удалить</string>
+    <string name="edit">Изменить</string>
+    <string name="share">Поделиться</string>
+    <string name="close">Закрыть</string>
+    <string name="edit_message">Изменить сообщение</string>
+    <string name="error_edit">Содержимое не может быть пустым</string>
+    <string name="choose_share_post">Поделиться постом</string>
 </resources>

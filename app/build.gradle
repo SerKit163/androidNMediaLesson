@@ -48,12 +48,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 
-    def activity_version = "1.4.0"
-    implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation "androidx.activity:activity-ktx:1.5.0"
 
-    def lifecycle_version = "2.4.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
 
     implementation "androidx.recyclerview:recyclerview:1.2.1"
+
+    implementation "androidx.fragment:fragment-ktx:1.5.0"
 }
