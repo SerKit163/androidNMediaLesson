@@ -1,5 +1,6 @@
 package applicationld.ru.netology.nmedia.activity
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +12,10 @@ import applicationld.ru.netology.nmedia.adapter.OnClickMainListener
 import applicationld.ru.netology.nmedia.adapter.PostsAdapter
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.databinding.ActivityMainBinding
+import applicationld.ru.netology.nmedia.param.PostParam
 import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
-
 
     private val viewModel: PostViewModel by viewModels()
 
@@ -36,6 +37,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        val pref = getSharedPreferences("posts", Context.MODE_PRIVATE)
+//        pref.edit().apply {
+//            putString("key", "Сохрание данных тест в Posts")
+//            apply()
+//        }
+//
+//        val result = pref.getString("key", null)
+//        println(result)
+
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -64,8 +75,19 @@ class MainActivity : AppCompatActivity() {
                 val arrayInput = ArrayList<String>()
                 post.content.let { arrayInput.add(it) }
                 post.video?.let { arrayInput.add(it) }
-//                editPostLauncher.launch(post.content)
                 editPostLauncher.launch(arrayInput)
+
+//                val postParam = PostParam()
+//                postParam.textContent = post.content
+//                postParam.linkVideo = post.video
+//                post.content.let { postParam.textContent = it }
+
+//                postParam.apply {
+//                    textContent = "post.content"
+//                    linkVideo = "advfbfeb"
+//                }
+
+//                editPostLauncher.launch(postParam)
             }
 
             override fun onVideo(post: Post) {

@@ -31,7 +31,9 @@ class PostViewHolder(
 //                if (post.likeByMe) R.drawable.ic_like_on_24 else R.drawable.ic_like_border_24
 //            )
 
-            if (!post.video.isNullOrBlank()) {
+            if (post.video.isNullOrBlank()) {
+                videoGroup.visibility = View.GONE
+            } else {
                 videoGroup.visibility = View.VISIBLE
             }
 
