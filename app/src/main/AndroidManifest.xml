@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia10">
         <activity
-            android:name=".activity.VideoPostActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.AppActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
