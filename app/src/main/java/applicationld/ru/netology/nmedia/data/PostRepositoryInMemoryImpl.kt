@@ -38,76 +38,6 @@ class PostRepositoryInMemoryImpl(
     }
 
 
-    /**
-     *
-     * SharedPreferences
-     *
-     * private val prefs = context.getSharedPreferences("posts", Context.MODE_PRIVATE)
-     * private val postKey = "posts"
-     *
-    private fun sync() {
-    prefs.edit {
-    val postString = gson.toJson(posts, type)
-    putString(postKey, postString)
-    }
-    }
-
-    private fun readAll(): List<Post> =
-    prefs.getString(postKey, null)?.let {
-    gson.fromJson<List<Post>>(it, type)
-    }.orEmpty()
-     */
-
-    /**
-     *
-     * Альтернативный вариант из слайда Сохранение данных
-     * Нужно еще к каждому изменяемому методу добавлять sync()
-     *
-     * //    private var posts = emptyList<Post>()
-     *
-    //    init {
-    //        prefs.getString(postKey, null)?.let {
-    //            posts = gson.fromJson(it, type)
-    //            data.value = posts
-    //        }
-    //    }
-    //
-    //    private fun sync() {
-    //        with(prefs.edit()) {
-    //            putString(postKey, gson.toJson(posts))
-    //            apply()
-    //        }
-    //    }
-     */
-
-    /**
-     *
-     * Список фиксированный Постов
-     *
-    //    private var posts = listOf(
-    //        Post(
-    //            id = 2,
-    //            author = "Нетология. Университет интернет-профессий будущего",
-    //            content = "Привет, это новая Нетология!",
-    //            published = "30 мая в 10:34",
-    //            likeByMe = false,
-    //            likeByMeCount = 0,
-    //            shareByMeCount = 0,
-    //            video = "https://www.youtube.com/watch?v=JC5Qch9VTQ4"
-    //        ),
-    //        Post(
-    //            id = 1,
-    //            author = "Нетология. Университет интернет-профессий будущего",
-    //            content = "Привет, это новая Нетология!",
-    //            published = "21 мая в 21:00",
-    //            likeByMe = false,
-    //            likeByMeCount = 999,
-    //            shareByMeCount = 1098,
-    //            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
-    //        )
-    //    )
-     */
-
     override fun getAll(): LiveData<List<Post>> = data
 
     override fun likeById(id: Long) {
@@ -136,12 +66,11 @@ class PostRepositoryInMemoryImpl(
 
     override fun save(post: Post) {
 
-//        // Добавление нового поста
+        //  Добавление нового поста
         if (post.id == 0L) {
             posts = listOf(
                 post.copy(
                     id = posts.firstOrNull()?.id?.plus(1) ?: 1L
-//                    id = (posts.firstOrNull()?.id ?: 0L) + 1
                 )
             ) + posts
             data.value = posts

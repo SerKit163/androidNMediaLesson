@@ -47,14 +47,6 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
                 content = content,
             )
         }
-
-//        edited.value?.let {
-//            val text = content.trim()
-//            if (it.content == text) {
-//                return
-//            }
-//            edited.value = it.copy(content = text)
-//        }
     }
 
     fun changeVideo(video: String) {
@@ -69,31 +61,6 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
     fun close() {
         edited.value = empty
     }
-
-
-//    override fun onLike(post: Post) {
-//        repository.likeById(post.id)
-//    }
-//
-//    override fun onShare(post: Post) {
-//        repository.shareById(post.id)
-//        val intent = Intent().apply {
-//            action = Intent.ACTION_SEND
-//            putExtra(Intent.EXTRA_TEXT, post.content)
-//            type = "text/plain"
-//        }
-//
-//        val shareIntent = Intent.createChooser(intent, null)
-//        startActivity(shareIntent)
-//
-//
-//    override fun onRemove(post: Post) {
-//        repository.removeById(post.id)
-//    }
-//
-//    override fun onEdit(post: Post) {
-//        edit(post)
-//    }
 
     fun onLikeClicked(id: Long) = repository.likeById(id)
     fun onShareClicked(id: Long) = repository.shareById(id)
