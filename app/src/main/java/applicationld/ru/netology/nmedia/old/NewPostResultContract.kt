@@ -1,13 +1,14 @@
-package applicationld.ru.netology.nmedia.activity
+package applicationld.ru.netology.nmedia.old
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
+import applicationld.ru.netology.nmedia.fragment.NewPostFragment
 
 class NewPostResultContract: ActivityResultContract<Unit, List<String?>>() {
     override fun createIntent(context: Context, input: Unit): Intent {
-        return Intent(context, NewPostActivity::class.java)
+        return Intent(context, NewPostFragment::class.java)
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): List<String?> =

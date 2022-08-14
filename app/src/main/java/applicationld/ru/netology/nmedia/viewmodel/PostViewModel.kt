@@ -3,11 +3,9 @@ package applicationld.ru.netology.nmedia.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.data.PostRepository
 import applicationld.ru.netology.nmedia.data.PostRepositoryInMemoryImpl
-import applicationld.ru.netology.nmedia.param.PostParam
 
 private val empty = Post(
     id = 0,
@@ -71,6 +69,7 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
     fun close() {
         edited.value = empty
     }
+
 
 //    override fun onLike(post: Post) {
 //        repository.likeById(post.id)
