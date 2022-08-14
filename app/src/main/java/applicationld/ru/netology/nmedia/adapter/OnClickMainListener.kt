@@ -8,5 +8,5 @@ interface OnClickMainListener {
     fun onRemove(post: Post)
     fun onEdit(post: Post)
     fun onVideo(post: Post)
-//    fun onClose(post: Post)
+    fun onDetail(post: Post)
 }
