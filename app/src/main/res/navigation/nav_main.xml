@@ -25,7 +25,11 @@
         android:id="@+id/newPostFragment"
         android:name="applicationld.ru.netology.nmedia.fragment.NewPostFragment"
         android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
+        tools:layout="@layout/fragment_new_post" >
+        <action
+            android:id="@+id/action_newPostFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postCardFragment"
         android:name="applicationld.ru.netology.nmedia.fragment.PostCardFragment"

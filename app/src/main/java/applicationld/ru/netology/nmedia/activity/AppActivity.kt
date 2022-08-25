@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import applicationld.ru.netology.nmedia.R
 import applicationld.ru.netology.nmedia.fragment.FeedFragment.Companion.textArg
 
-
 class AppActivity : AppCompatActivity(R.layout.activity_app) {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,6 @@
 package applicationld.ru.netology.nmedia.fragment
 
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -73,6 +74,8 @@ class FeedFragment : Fragment() {
             override fun onDetail(post: Post) {
                 val action = FeedFragmentDirections.actionFeedFragmentToPostCardFragment(post.id.toInt())
                 findNavController().navigate(action)
+
+//                findNavController().navigate(R.id.action_feedFragment_to_postCardFragment, Bundle().apply { idArg = post.id })
             }
 
         })
@@ -93,6 +96,7 @@ class FeedFragment : Fragment() {
     companion object {
         var Bundle.textArg: String? by StringArg
         var Bundle.videoArg: String? by StringArg
+//        var Bundle.idArg: Long by LongArg
     }
 
 }

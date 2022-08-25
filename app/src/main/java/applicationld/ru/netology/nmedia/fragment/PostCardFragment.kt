@@ -80,6 +80,7 @@ class PostCardFragment : Fragment() {
 
         })
 
+
         viewModel.data.observe(viewLifecycleOwner) { posts ->
             val post = posts.find { it.id == args.postId.toLong() } ?: run {
                 findNavController().navigateUp()
