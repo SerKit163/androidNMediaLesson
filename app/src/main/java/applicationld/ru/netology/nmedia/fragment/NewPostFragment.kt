@@ -15,7 +15,9 @@ import applicationld.ru.netology.nmedia.fragment.FeedFragment.Companion.videoArg
 import applicationld.ru.netology.nmedia.util.AndroidUtils
 import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
 
-const val TEXT_POST_DRAFT = "draft_post"
+const val POST_DRAFT = "post_draft"
+const val CONTENT_POST_DRAFT = "content_post_draft"
+const val VIDEO_POST_DRAFT = "video_post_draft"
 
 class NewPostFragment : Fragment() {
     lateinit var binding: FragmentNewPostBinding
@@ -34,13 +36,14 @@ class NewPostFragment : Fragment() {
             false
         )
 
-        val prefs = requireActivity().getSharedPreferences(TEXT_POST_DRAFT, Context.MODE_PRIVATE)
+        val prefs = requireActivity().getSharedPreferences(POST_DRAFT, Context.MODE_PRIVATE)
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
 
             if (!binding.textPost.text.isNullOrBlank()) {
                 prefs.edit().apply {
-                    putString(TEXT_POST_DRAFT, binding.textPost.text.toString())
+                    putString(CONTENT_POST_DRAFT, binding.textPost.text.toString())
+                    putString(VIDEO_POST_DRAFT, binding.videoPost.text.toString())
                     apply()
                 }
             }
@@ -55,7 +58,8 @@ class NewPostFragment : Fragment() {
                     videoArg?.let(videoPost::setText)
                 }
 
-                binding.textPost.setText(prefs.getString(TEXT_POST_DRAFT, null))
+                binding.textPost.setText(prefs.getString(CONTENT_POST_DRAFT, null))
+                binding.videoPost.setText(prefs.getString(VIDEO_POST_DRAFT, null))
 
                 btnAdd.setOnClickListener {
                     if (!textPost.text.isNullOrBlank()) {
@@ -64,7 +68,8 @@ class NewPostFragment : Fragment() {
                         viewModel.save()
                         AndroidUtils.hideKeyboard(requireView())
                         prefs.edit().apply {
-                            putString(TEXT_POST_DRAFT, "")
+                            putString(CONTENT_POST_DRAFT, "")
+                            putString(VIDEO_POST_DRAFT, "")
                             apply()
                         }
                     }
