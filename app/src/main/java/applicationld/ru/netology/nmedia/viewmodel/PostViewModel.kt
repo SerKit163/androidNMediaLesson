@@ -5,9 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.data.PostRepository
-import applicationld.ru.netology.nmedia.data.PostRepositoryInMemoryImpl
 import applicationld.ru.netology.nmedia.sql.AppDb
-import applicationld.ru.netology.nmedia.sql.PostRepositorySQLiteImpl
+import applicationld.ru.netology.nmedia.sql.PostRepositoryImpl
 
 private val empty = Post(
     id = 0,
@@ -17,15 +16,13 @@ private val empty = Post(
     likeByMe = false,
     likeByMeCount = 0,
     shareByMeCount = 0,
-    viewByMeCount = 0,
     video = ""
 )
 
 class PostViewModel(application: Application): AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositorySQLiteImpl(
-        AppDb.getInstance(application).postDao
+    private val repository: PostRepository = PostRepositoryImpl(
+        AppDb.getInstance(context = application).postDao()
     )
-//    private val repository: PostRepository = PostRepositoryInMemoryImpl(application)
 
     val data = repository.getAll()
     val edited = MutableLiveData(empty)

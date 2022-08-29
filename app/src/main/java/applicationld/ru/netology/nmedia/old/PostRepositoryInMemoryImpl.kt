@@ -1,8 +1,10 @@
-package applicationld.ru.netology.nmedia.data
+package applicationld.ru.netology.nmedia.old
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import applicationld.ru.netology.nmedia.data.Post
+import applicationld.ru.netology.nmedia.data.PostRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

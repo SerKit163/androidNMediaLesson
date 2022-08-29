@@ -53,13 +53,13 @@ class NewPostFragment : Fragment() {
             with(binding) {
                 textPost.requestFocus()
 
+                binding.textPost.setText(prefs.getString(CONTENT_POST_DRAFT, null))
+                binding.videoPost.setText(prefs.getString(VIDEO_POST_DRAFT, null))
+
                 arguments?.apply {
                     textArg?.let(textPost::setText)
                     videoArg?.let(videoPost::setText)
                 }
-
-                binding.textPost.setText(prefs.getString(CONTENT_POST_DRAFT, null))
-                binding.videoPost.setText(prefs.getString(VIDEO_POST_DRAFT, null))
 
                 btnAdd.setOnClickListener {
                     if (!textPost.text.isNullOrBlank()) {
