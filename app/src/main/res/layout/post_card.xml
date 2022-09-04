@@ -109,6 +109,7 @@
         android:id="@+id/textContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:autoLink="web"
         android:layout_margin="@dimen/common_spacing"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

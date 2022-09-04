@@ -13,4 +13,8 @@
     <string name="new_post">Новый пост</string>
     <string name="edit_post">Редактировать пост</string>
     <string name="enter_video">Введите ссылку для видео</string>
+    <string name="notification_user_liked">%1s поставил лайк посту %2s</string>
+    <string name="notification_user_new_post">%1s опубликовал новый пост:</string>
+    <string name="google_play_unavailable">Google Api Недоступен</string>
+    <string name="notification_exception">Обновите приложение!</string>
 </resources>

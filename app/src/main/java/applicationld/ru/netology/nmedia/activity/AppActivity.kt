@@ -2,10 +2,14 @@ package applicationld.ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import applicationld.ru.netology.nmedia.R
 import applicationld.ru.netology.nmedia.fragment.FeedFragment.Companion.textArg
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.firebase.messaging.FirebaseMessaging
 
 class AppActivity : AppCompatActivity(R.layout.activity_app) {
 
@@ -25,6 +29,50 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
                     }
                 )
             }
+        }
+
+        checkGoogleApiAvailability()
+
+    }
+
+//    private fun checkGoogleApiAvailability() {
+//        with(GoogleApiAvailability.getInstance()) {
+//            val code = isGooglePlayServicesAvailable(this@AppActivity)
+//            if (code == ConnectionResult.SUCCESS) {
+//                return@with
+//            }
+//            if (isUserResolvableError(code)) {
+//                getErrorDialog(this@AppActivity, code, 9000)?.show()
+//                return
+//            }
+//            Toast.makeText(
+//                this@AppActivity,
+//                getString(R.string.google_play_unavailable),
+//                Toast.LENGTH_LONG
+//            ).show()
+//        }
+//
+//        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+//            println(it)
+//        }
+//    }
+
+    private fun checkGoogleApiAvailability() {
+        with(GoogleApiAvailability.getInstance()) {
+            val code = isGooglePlayServicesAvailable(this@AppActivity)
+            if (code == ConnectionResult.SUCCESS) {
+                return@with
+            }
+            if (isUserResolvableError(code)) {
+                getErrorDialog(this@AppActivity, code, 9000)?.show()
+                return
+            }
+            Toast.makeText(this@AppActivity, R.string.google_play_unavailable, Toast.LENGTH_LONG)
+                .show()
+        }
+
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            println(it)
         }
     }
 }

@@ -24,4 +24,10 @@
     <string name="enter_video">Enter link for video</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="channel_remote_name" translatable="false">Server Notifications</string>
+    <string name="channel_remote_description" translatable="false">Notifications from remote server</string>
+    <string name="notification_user_liked">%1s I liked the post %2s</string>
+    <string name="google_play_unavailable">Google Api Unavailable</string>
+    <string name="notification_user_new_post">%1s posted a new post:</string>
+    <string name="notification_exception">Update app!</string>
 </resources>
