@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -38,12 +39,10 @@ class FeedFragment : Fragment() {
 
         val adapter = PostsAdapter(object : OnClickMainListener {
             override fun onLike(post: Post) {
-                viewModel.onLikeClicked(post.id)
+                viewModel.likeById(post.id)
             }
 
             override fun onShare(post: Post) {
-                viewModel.onShareClicked(post.id)
-
                 val intent = Intent(Intent.ACTION_SEND).apply {
                     putExtra(Intent.EXTRA_TEXT, post.content)
                     type = "text/plain"
@@ -53,15 +52,15 @@ class FeedFragment : Fragment() {
             }
 
             override fun onRemove(post: Post) {
-                viewModel.onRemoveClicked(post.id)
+                viewModel.removeById(post.id)
             }
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
-                    textArg = post.content
-                    videoArg = post.video
-                })
+//                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
+//                    textArg = post.content
+//                    videoArg = post.video
+//                })
 
             }
 
@@ -72,8 +71,8 @@ class FeedFragment : Fragment() {
             }
 
             override fun onDetail(post: Post) {
-                val action = FeedFragmentDirections.actionFeedFragmentToPostCardFragment(post.id.toInt())
-                findNavController().navigate(action)
+//                val action = FeedFragmentDirections.actionFeedFragmentToPostCardFragment(post.id.toInt())
+//                findNavController().navigate(action)
 
 //                findNavController().navigate(R.id.action_feedFragment_to_postCardFragment, Bundle().apply { idArg = post.id })
             }
@@ -82,8 +81,15 @@ class FeedFragment : Fragment() {
 
         binding.list.adapter = adapter
 
-        viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
+        viewModel.data.observe(viewLifecycleOwner, { state ->
+            adapter.submitList(state.posts)
+            binding.progress.isVisible = state.loading
+            binding.errorGroup.isVisible = state.error
+            binding.emptyText.isVisible = state.empty
+        })
+
+        binding.retryButton.setOnClickListener {
+            viewModel.loadPosts()
         }
 
         binding.btnAddMain.setOnClickListener {

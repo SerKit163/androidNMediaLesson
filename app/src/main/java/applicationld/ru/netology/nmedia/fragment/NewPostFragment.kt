@@ -38,6 +38,7 @@ class NewPostFragment : Fragment() {
 
         val prefs = requireActivity().getSharedPreferences(POST_DRAFT, Context.MODE_PRIVATE)
 
+//        Button previous
         requireActivity().onBackPressedDispatcher.addCallback(this) {
 
             if (!binding.textPost.text.isNullOrBlank()) {
@@ -62,18 +63,13 @@ class NewPostFragment : Fragment() {
                 }
 
                 btnAdd.setOnClickListener {
-                    if (!textPost.text.isNullOrBlank()) {
-                        viewModel.changeContent(textPost.text.toString())
-                        viewModel.changeVideo(videoPost.text.toString())
-                        viewModel.save()
-                        AndroidUtils.hideKeyboard(requireView())
-                        prefs.edit().apply {
-                            putString(CONTENT_POST_DRAFT, "")
-                            putString(VIDEO_POST_DRAFT, "")
-                            apply()
-                        }
-                    }
+                    viewModel.changeContent(textPost.text.toString())
+                    viewModel.save()
+                    AndroidUtils.hideKeyboard(requireView())
+                }
 
+                viewModel.postCreated.observe(viewLifecycleOwner) {
+                    viewModel.loadPosts()
                     findNavController().navigateUp()
                 }
             }
