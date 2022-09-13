@@ -30,9 +30,9 @@
     <string name="google_play_unavailable">Google Api Unavailable</string>
     <string name="notification_user_new_post">%1s posted a new post:</string>
     <string name="notification_exception">Update app!</string>
-    <string name="error_loading">error_loading</string>
-    <string name="retry_loading">retry_loading</string>
-    <string name="empty_post">empty_post</string>
-    <string name="add_post">add_post</string>
+    <string name="error_loading">Error loading</string>
+    <string name="retry_loading">Retry loading</string>
+    <string name="empty_post">Empty post</string>
+    <string name="add_post">Add post</string>
     <string name="empty_posts">empty_posts</string>
 </resources>
