@@ -5,7 +5,6 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.R
-import applicationld.ru.netology.nmedia.databinding.FragmentPostCardBinding
 import applicationld.ru.netology.nmedia.databinding.PostCardBinding
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -21,10 +20,10 @@ class PostViewHolder(
             dataHeader.text = post.published
             textContent.text = post.content
 
-            ibLike.text = countString(post.likeByMeCount)
-            ibShare.text = countString(post.shareByMeCount)
+            ibLike.text = countString(post.likes)
+            ibShare.text = countString(post.shares)
 
-            ibLike.isChecked = post.likeByMe
+            ibLike.isChecked = post.likedByMe
 
             if (post.video.isNullOrBlank()) {
                 videoGroup.visibility = View.GONE

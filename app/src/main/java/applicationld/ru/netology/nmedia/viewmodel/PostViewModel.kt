@@ -17,9 +17,9 @@ private val empty = Post(
     author = "",
     content = "",
     published = "",
-    likeByMe = false,
-    likeByMeCount = 0,
-    shareByMeCount = 0,
+    likedByMe = false,
+    likes = 0,
+    shares = 0,
     video = ""
 )
 
@@ -84,9 +84,21 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun likeById(id: Long) {
+    fun likeById(post: Post) {
         thread {
-            repository.likeById(id)
+            edited.postValue(
+                edited.value?.copy(
+                    likedByMe = !post.likedByMe
+                )
+            )
+
+            if (!post.likedByMe) {
+                repository.likeById(post.id)
+                loadPosts()
+            } else {
+                repository.unlikeById(post.id)
+                loadPosts()
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -37,9 +38,14 @@ class FeedFragment : Fragment() {
             false
         )
 
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.loadPosts()
+            binding.swipeRefresh.isRefreshing = false
+        }
+
         val adapter = PostsAdapter(object : OnClickMainListener {
             override fun onLike(post: Post) {
-                viewModel.likeById(post.id)
+                viewModel.likeById(post)
             }
 
             override fun onShare(post: Post) {
@@ -104,5 +110,4 @@ class FeedFragment : Fragment() {
         var Bundle.videoArg: String? by StringArg
 //        var Bundle.idArg: Long by LongArg
     }
-
 }

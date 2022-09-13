@@ -6,12 +6,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import applicationld.ru.netology.nmedia.R
+import applicationld.ru.netology.nmedia.databinding.ActivityAppBinding
 import applicationld.ru.netology.nmedia.fragment.FeedFragment.Companion.textArg
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.messaging.FirebaseMessaging
 
 class AppActivity : AppCompatActivity(R.layout.activity_app) {
+
+    lateinit var binding: ActivityAppBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
