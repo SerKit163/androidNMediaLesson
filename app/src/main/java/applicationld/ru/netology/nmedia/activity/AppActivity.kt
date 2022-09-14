@@ -14,8 +14,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class AppActivity : AppCompatActivity(R.layout.activity_app) {
 
-    lateinit var binding: ActivityAppBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
