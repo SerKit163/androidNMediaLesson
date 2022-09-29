@@ -70,22 +70,19 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //    }
 
     fun save() {
-
-        val old = _data.value?.posts.orEmpty()
-
         edited.value?.let {
-            repository.saveAsync(object : PostRepository.Callback<Post> {
+            repository.saveAsync(it, object : PostRepository.Callback<Post> {
                 override fun onSuccess(posts: Post) {
                     println(1)
-                    _data.postValue(FeedModel(posts = old))
+                    _data.postValue(FeedModel(posts = listOf(posts)))
+                    println(2)
+                    _postCreated.postValue(Unit)
                 }
 
                 override fun onError(e: Exception) {
-                    println(2)
                     _data.postValue(FeedModel(error = true))
                 }
             })
-            _postCreated.postValue(Unit)
         }
         edited.value = empty
     }
@@ -158,24 +155,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-//    fun likeById(post: Post) {
-//        thread {
-//            val old = _data.value?.posts.orEmpty()
-//            val likePostId = old.map {
-//                if (it.id == post.id) {
-//                    if (!it.likedByMe) {
-//                        repository.likeById(it.id)
-//                    } else {
-//                        repository.unlikeById(it.id)
-//                    }
-//                } else {
-//                    it
-//                }
-//            }
-//            _data.postValue(FeedModel(posts = likePostId))
-//        }
-//    }
-
 
     fun removeById(id: Long) {
         val old = _data.value?.posts.orEmpty()
@@ -185,26 +164,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onError(e: Exception) {
-                _data.postValue(FeedModel(error = true))
             }
         })
     }
-
-//    fun removeById(id: Long) {
-//        thread {
-//            val old = _data.value?.posts.orEmpty()
-//            _data.postValue(
-//                _data.value?.copy(posts = old
-//                    .filter { it.id != id }
-//                )
-//            )
-//            try {
-//                repository.removeById(id)
-//            } catch (e: IOException) {
-//                println(5)
-//                _data.postValue(_data.value?.copy(posts = old))
-//            }
-//        }
-//    }
 
 }

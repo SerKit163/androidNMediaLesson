@@ -145,12 +145,9 @@ class PostRepositoryImpl : PostRepository {
         TODO("Not yet implemented")
     }
 
-    override fun saveAsync(callback: PostRepository.Callback<Post>) {
-        callback.let {
-
-        }
+    override fun saveAsync(post: Post, callback: PostRepository.Callback<Post>) {
         val request: Request = Request.Builder()
-            .post(gson.toJson(PostEntity).toRequestBody(jsonType))
+            .post(gson.toJson(post).toRequestBody(jsonType))
             .url("${BASE_URL}/api/slow/posts")
             .build()
 
@@ -164,7 +161,7 @@ class PostRepositoryImpl : PostRepository {
                     }
 
                     try {
-                        callback.onSuccess(gson.fromJson(body, typeToken.type))
+                        callback.onSuccess(gson.fromJson(body, Post::class.java))
                     } catch (e: Exception) {
                         callback.onError(e)
                     }
