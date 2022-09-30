@@ -52,30 +52,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-//    fun loadPosts() {
-//        // Начинаем загрузку
-//        thread {
-//            _data.postValue(FeedModel(loading = true))
-//            try {
-//                // Данные успешно получены
-//                println(1)
-//                val posts = repository.getAll()
-//                println(2)
-//                FeedModel(posts = posts, empty = posts.isEmpty())
-//            } catch (e: IOException) {
-//                // Получена ошибка
-//                FeedModel(error = true)
-//            }.also(_data::postValue)
-//        }
-//    }
-
     fun save() {
+        val old = _data.value?.posts.orEmpty()
         edited.value?.let {
             repository.saveAsync(it, object : PostRepository.Callback<Post> {
                 override fun onSuccess(posts: Post) {
-                    println(1)
-                    _data.postValue(FeedModel(posts = listOf(posts)))
-                    println(2)
+                    _data.postValue(FeedModel(posts = listOf(posts) + old))
                     _postCreated.postValue(Unit)
                 }
 
@@ -86,16 +68,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-
-//    fun save() {
-//        edited.value?.let {
-//            thread {
-//                repository.save(it)
-//                _postCreated.postValue(Unit)
-//            }
-//        }
-//        edited.value = empty
-//    }
 
     fun edit(post: Post) {
         edited.value = post
@@ -164,6 +136,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onError(e: Exception) {
+                _data.postValue(FeedModel(posts = old.filter { it.id != id }))
             }
         })
     }
