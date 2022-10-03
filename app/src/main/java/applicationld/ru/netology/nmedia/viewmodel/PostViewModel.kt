@@ -136,7 +136,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onError(e: Exception) {
-                _data.postValue(FeedModel(posts = old.filter { it.id != id }))
+                _data.postValue(FeedModel(posts = old))
             }
         })
     }
