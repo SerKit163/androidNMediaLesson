@@ -47,8 +47,8 @@ class PostRepositoryImpl : PostRepository {
 
     override fun likeByIdAsync(id: Long, callback: PostRepository.Callback<Post>) {
         val request: Request = Request.Builder()
-            .post(gson.toJson(id).toRequestBody(jsonType))
             .url("${BASE_URL}/api/posts/${id}/likes")
+            .post(gson.toJson(id).toRequestBody(jsonType))
             .build()
 
        client.newCall(request)
@@ -70,8 +70,8 @@ class PostRepositoryImpl : PostRepository {
 
     override fun unlikeByIdAsync(id: Long, callback: PostRepository.Callback<Post>) {
         val request: Request = Request.Builder()
-            .delete()
             .url("${BASE_URL}/api/posts/${id}/likes")
+            .delete()
             .build()
 
         client.newCall(request)
@@ -96,7 +96,10 @@ class PostRepositoryImpl : PostRepository {
     }
 
     override fun shareById(id: Long) {
-        TODO("Not yet implemented")
+        val request: Request = Request.Builder()
+            .post(gson.toJson(id).toRequestBody(jsonType))
+            .url("${BASE_URL}/api/slow/posts")
+            .build()
     }
 
     override fun saveAsync(post: Post, callback: PostRepository.Callback<Post>) {
@@ -130,15 +133,21 @@ class PostRepositoryImpl : PostRepository {
     override fun removeByIdAsync(id: Long, callback: PostRepository.Callback<Unit>) {
         val request: Request = Request.Builder()
             .delete()
-            .url("${BASE_URL}/api/slow/posts/$id")
+            .url("${BASE_URL}/api/slow/posts/${id}")
             .build()
 
         client.newCall(request)
             .enqueue(object : Callback {
                 override fun onResponse(call: Call, response: Response) {
-                    val body = response.body?.string() ?: throw RuntimeException("body is null")
+//                    val body = response.body?.string() ?: throw RuntimeException("body is null")
+//                    try {
+//                        callback.onSuccess(gson.fromJson(body, Unit::class.java))
+//                    } catch (e: Exception) {
+//                        callback.onError(e)
+//                    }
+
                     try {
-                        callback.onSuccess(gson.fromJson(body, Unit::class.java))
+                        callback.onSuccess(Unit)
                     } catch (e: Exception) {
                         callback.onError(e)
                     }

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +16,7 @@ import applicationld.ru.netology.nmedia.adapter.OnClickMainListener
 import applicationld.ru.netology.nmedia.adapter.PostsAdapter
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.databinding.FragmentFeedBinding
+import applicationld.ru.netology.nmedia.util.LongArg
 import applicationld.ru.netology.nmedia.util.StringArg
 import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
 
@@ -62,11 +62,12 @@ class FeedFragment : Fragment() {
             }
 
             override fun onEdit(post: Post) {
+//              Создает новый пост, а не заменяет
                 viewModel.edit(post)
-//                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
-//                    textArg = post.content
-//                    videoArg = post.video
-//                })
+                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment, Bundle().apply {
+                    textArg = post.content
+                    videoArg = post.video
+                })
 
             }
 
@@ -77,8 +78,8 @@ class FeedFragment : Fragment() {
             }
 
             override fun onDetail(post: Post) {
-//                val action = FeedFragmentDirections.actionFeedFragmentToPostCardFragment(post.id.toInt())
-//                findNavController().navigate(action)
+                val action = FeedFragmentDirections.actionFeedFragmentToPostCardFragment(post.id.toInt())
+                findNavController().navigate(action)
 
 //                findNavController().navigate(R.id.action_feedFragment_to_postCardFragment, Bundle().apply { idArg = post.id })
             }
@@ -87,12 +88,12 @@ class FeedFragment : Fragment() {
 
         binding.list.adapter = adapter
 
-        viewModel.data.observe(viewLifecycleOwner, { state ->
+        viewModel.data.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.posts)
             binding.progress.isVisible = state.loading
             binding.errorGroup.isVisible = state.error
             binding.emptyText.isVisible = state.empty
-        })
+        }
 
         binding.retryButton.setOnClickListener {
             viewModel.loadPosts()
@@ -108,6 +109,6 @@ class FeedFragment : Fragment() {
     companion object {
         var Bundle.textArg: String? by StringArg
         var Bundle.videoArg: String? by StringArg
-//        var Bundle.idArg: Long by LongArg
+        var Bundle.idArg: Long by LongArg
     }
 }

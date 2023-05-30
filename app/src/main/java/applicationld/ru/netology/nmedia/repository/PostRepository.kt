@@ -18,7 +18,7 @@ interface PostRepository {
     fun saveAsync(post: Post, callback : Callback<Post>)
 
     interface Callback<T> {
-        fun onSuccess(posts: T) {}
-        fun onError(e: Exception) {}
+        fun onSuccess(posts: T)
+        fun onError(e: Exception)
     }
 }
