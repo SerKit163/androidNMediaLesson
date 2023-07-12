@@ -3,11 +3,15 @@ package applicationld.ru.netology.nmedia.adapter
 import android.view.View
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.R
+import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.databinding.PostCardBinding
+import applicationld.ru.netology.nmedia.image.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import java.math.RoundingMode
 import java.text.DecimalFormat
+
 
 class PostViewHolder(
     private val binding: PostCardBinding,
@@ -20,6 +24,22 @@ class PostViewHolder(
             dataHeader.text = post.published
             textContent.text = post.content
 
+            val urlAvatars = "http://10.0.2.2:9999/avatars/${post.authorAvatar}"
+            val urlPostImage = "http://10.0.2.2:9999/images/${post.attachment?.url}"
+
+            iconHeader.load(urlAvatars)
+
+            Glide.with(binding.postImage)
+                .load(urlPostImage)
+                .placeholder(R.drawable.baseline_downloading_24)
+                .error(R.drawable.baseline_error_outline_24)
+                .timeout(30_000)
+                .into(binding.postImage)
+
+
+            textImage.text = post.attachment?.description
+
+
             ibLike.text = countString(post.likes)
             ibShare.text = countString(post.shares)
 
@@ -29,6 +49,12 @@ class PostViewHolder(
                 videoGroup.visibility = View.GONE
             } else {
                 videoGroup.visibility = View.VISIBLE
+            }
+
+            if (post.attachment?.url.isNullOrBlank()) {
+                imageGroup.visibility = View.GONE
+            } else {
+                imageGroup.visibility = View.VISIBLE
             }
 
             root.setOnClickListener {

@@ -4,24 +4,24 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import applicationld.ru.netology.nmedia.R
 import applicationld.ru.netology.nmedia.data.Post
 import applicationld.ru.netology.nmedia.model.FeedModel
 import applicationld.ru.netology.nmedia.repository.PostRepository
 import applicationld.ru.netology.nmedia.repository.PostRepositoryImpl
 import applicationld.ru.netology.nmedia.util.SingleLiveEvent
-import okhttp3.Callback
-import java.io.IOException
-import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0,
     author = "",
+    authorAvatar = "",
     content = "",
     published = "",
     likedByMe = false,
     likes = 0,
     shares = 0,
-    video = ""
+    video = "",
+    attachment = null
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
