@@ -1,12 +1,15 @@
 package applicationld.ru.netology.nmedia.fragment
 
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +22,7 @@ import applicationld.ru.netology.nmedia.databinding.FragmentFeedBinding
 import applicationld.ru.netology.nmedia.util.LongArg
 import applicationld.ru.netology.nmedia.util.StringArg
 import applicationld.ru.netology.nmedia.viewmodel.PostViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class FeedFragment : Fragment() {
 
@@ -42,6 +46,8 @@ class FeedFragment : Fragment() {
             viewModel.loadPosts()
             binding.swipeRefresh.isRefreshing = false
         }
+
+
 
         val adapter = PostsAdapter(object : OnClickMainListener {
             override fun onLike(post: Post) {
@@ -86,6 +92,7 @@ class FeedFragment : Fragment() {
 
         })
 
+
         binding.list.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner) { state ->
@@ -93,7 +100,28 @@ class FeedFragment : Fragment() {
             binding.progress.isVisible = state.loading
             binding.errorGroup.isVisible = state.error
             binding.emptyText.isVisible = state.empty
+
+            if (state.errorService) {
+                val snakebar = Snackbar.make(
+                    binding.root,
+                    "Что-то пошло не так, пожалуйста обновите!",
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("Обновить"){
+                    viewModel.loadPosts()
+//                        Toast.makeText(
+//                            context,
+//                            "Обновление",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+                    }
+
+//                val snackbarView = snakebar.view
+//                snackbarView.setBackgroundColor(Color.parseColor("#00ff20"))
+
+                snakebar.show()
+            }
         }
+
 
         binding.retryButton.setOnClickListener {
             viewModel.loadPosts()
@@ -109,6 +137,11 @@ class FeedFragment : Fragment() {
     companion object {
         var Bundle.textArg: String? by StringArg
         var Bundle.videoArg: String? by StringArg
-        var Bundle.idArg: Long by LongArg
+//        var Bundle.idArg: Long by LongArg
     }
+
 }
+
+
+
+

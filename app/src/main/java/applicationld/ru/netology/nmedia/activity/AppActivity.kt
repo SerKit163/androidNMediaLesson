@@ -54,4 +54,12 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             println(it)
         }
     }
+
+//    fun errorService(text: String) {
+//        Toast.makeText(
+//            this,
+//            text,
+//            Toast.LENGTH_LONG
+//        ).show()
+//    }
 }

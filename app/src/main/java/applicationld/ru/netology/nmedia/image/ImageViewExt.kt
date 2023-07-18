@@ -9,12 +9,14 @@ import com.bumptech.glide.request.RequestOptions
 
 
 
-fun ImageView.load(url: String) {
+fun ImageView.load(url: String, circleImage: Boolean = false) {
     Glide.with(this)
         .load(url)
         .placeholder(R.drawable.baseline_downloading_24)
         .error(R.drawable.baseline_error_outline_24)
-        .circleCrop()
+        .let {
+            if (circleImage) it.circleCrop() else it
+        }
         .timeout(30_000)
         .into(this)
 }

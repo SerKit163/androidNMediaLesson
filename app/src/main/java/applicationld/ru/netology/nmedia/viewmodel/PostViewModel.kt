@@ -1,6 +1,7 @@
 package applicationld.ru.netology.nmedia.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import applicationld.ru.netology.nmedia.model.FeedModel
 import applicationld.ru.netology.nmedia.repository.PostRepository
 import applicationld.ru.netology.nmedia.repository.PostRepositoryImpl
 import applicationld.ru.netology.nmedia.util.SingleLiveEvent
+import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0,
@@ -35,6 +37,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val postCreated: LiveData<Unit>
         get() = _postCreated
 
+    private val _postCreatedError = SingleLiveEvent<Unit>()
+    val postCreatedError: LiveData<Unit>
+        get() = _postCreatedError
+
+    private val _postCreatedLoading = MutableLiveData(false)
+    val postCreatedLoading: LiveData<Boolean>
+        get() = _postCreatedLoading
+
     init {
         loadPosts()
     }
@@ -43,11 +53,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         _data.value = FeedModel(loading = true)
         repository.getAllAsync(object : PostRepository.Callback<List<Post>> {
             override fun onSuccess(posts: List<Post>) {
-                _data.postValue(FeedModel(posts = posts, empty = posts.isEmpty()))
+                _data.value = FeedModel(posts = posts, empty = posts.isEmpty())
             }
 
             override fun onError(e: Exception) {
-                _data.postValue(FeedModel(error = true))
+                _data.value = FeedModel(error = true)
             }
         })
     }
@@ -55,16 +65,41 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun save() {
         val old = _data.value?.posts.orEmpty()
         edited.value?.let {
-            repository.saveAsync(it, object : PostRepository.Callback<Post> {
-                override fun onSuccess(posts: Post) {
-                    _data.postValue(FeedModel(posts = listOf(posts) + old))
-                    _postCreated.postValue(Unit)
-                }
+            try {
+                _postCreatedLoading.value = true
+                repository.saveAsync(it, object : PostRepository.Callback<Post> {
+                    override fun onSuccess(posts: Post) {
+                        _data.value = FeedModel(posts = listOf(posts) + old)
+                        _postCreated.value = Unit
+                    }
 
-                override fun onError(e: Exception) {
-                    _data.postValue(FeedModel(error = true))
-                }
-            })
+                    override fun onError(e: Exception) {
+                        _data.value = _data.value?.copy(errorService = true)
+//                        _data.value = FeedModel(errorService = true)
+//                    _data.postValue(FeedModel(error = true))
+                    }
+                })
+                _postCreated.value = Unit
+            } catch (e: Exception) {
+                _postCreatedError.value = Unit
+            } finally {
+                _postCreatedLoading.value = false
+            }
+
+//            Это код исходный
+
+//            repository.saveAsync(it, object : PostRepository.Callback<Post> {
+//                override fun onSuccess(posts: Post) {
+//                    _data.value = FeedModel(posts = listOf(posts) + old)
+//                    _postCreated.value = Unit
+//                }
+//
+//                override fun onError(e: Exception) {
+//                    _data.value = FeedModel(errorService = true)
+////                    _data.postValue(FeedModel(error = true))
+//                }
+//            })
+
         }
         edited.value = empty
 //        edited.postValue(empty)
@@ -102,11 +137,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                             it
                         }
                     }
-                    _data.postValue(FeedModel(posts = newPost))
+                    _data.value = FeedModel(posts = newPost)
                 }
 
                 override fun onError(e: Exception) {
-                    _data.postValue(FeedModel(error = true))
+                    _data.value = _data.value?.copy(errorService = true)
+//                    _data.value = FeedModel(errorService = true)
                 }
             })
         } else {
@@ -119,10 +155,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                             it
                         }
                     }
-                    _data.postValue(FeedModel(posts = newPost))
+                    _data.value = FeedModel(posts = newPost)
                 }
                 override fun onError(e: Exception) {
-                    _data.postValue(FeedModel(error = true))
+                    _data.value = _data.value?.copy(errorService = true)
+//                    _data.value = FeedModel(errorService = true)
                 }
             })
         }
@@ -137,7 +174,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             override fun onError(e: Exception) {
-                _data.postValue(FeedModel(posts = old))
+                _data.value = FeedModel(posts = old)
             }
         })
     }
