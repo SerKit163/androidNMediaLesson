@@ -38,71 +38,71 @@ class FCMService : FirebaseMessagingService() {
         println(Gson().toJson(message))
         println(message.data)
 
-        message.data[action]?.let {
-            try {
-                when (Action.valueOf(it)) {
-                    Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
-                    Action.NEW_POST -> handleNewPost(gson.fromJson(message.data[content], NewPost::class.java))
-                }
-            } catch (e: IllegalArgumentException) {
-                handleException()
-            }
-        }
+//        message.data[action]?.let {
+//            try {
+//                when (Action.valueOf(it)) {
+//                    Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+//                    Action.NEW_POST -> handleNewPost(gson.fromJson(message.data[content], NewPost::class.java))
+//                }
+//            } catch (e: IllegalArgumentException) {
+//                handleException()
+//            }
+//        }
     }
 
     override fun onNewToken(token: String) {
         println(token)
     }
 
-    private fun handleLike(content: Like) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(
-                getString(
-                    R.string.notification_user_liked,
-                    content.userName,
-                    content.postAuthor,
-                )
-            )
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
+//    private fun handleLike(content: Like) {
+//        val notification = NotificationCompat.Builder(this, channelId)
+//            .setSmallIcon(R.drawable.ic_notification)
+//            .setContentTitle(
+//                getString(
+//                    R.string.notification_user_liked,
+//                    content.userName,
+//                    content.postAuthor,
+//                )
+//            )
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .build()
+//
+//        NotificationManagerCompat.from(this)
+//            .notify(Random.nextInt(100_000), notification)
+//    }
 
-        NotificationManagerCompat.from(this)
-            .notify(Random.nextInt(100_000), notification)
-    }
+//    private fun handleNewPost(content: NewPost) {
+//        val notification = NotificationCompat.Builder(this, channelId)
+//            .setSmallIcon(R.drawable.ic_notification)
+//            .setContentTitle(
+//                getString(
+//                    R.string.notification_user_new_post,
+//                    content.userName,
+//                )
+//            )
+//            .setContentText(content.textPost)
+//            .setStyle(NotificationCompat.BigTextStyle().bigText(content.textPost))
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .build()
+//
+//        NotificationManagerCompat.from(this)
+//            .notify(Random.nextInt(100_000), notification)
+//    }
 
-    private fun handleNewPost(content: NewPost) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(
-                getString(
-                    R.string.notification_user_new_post,
-                    content.userName,
-                )
-            )
-            .setContentText(content.textPost)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(content.textPost))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
-
-        NotificationManagerCompat.from(this)
-            .notify(Random.nextInt(100_000), notification)
-    }
-
-    private fun handleException() {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(
-                getString(
-                    R.string.notification_exception,
-                )
-            )
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
-
-        NotificationManagerCompat.from(this)
-            .notify(Random.nextInt(100_000), notification)
-    }
+//    private fun handleException() {
+//        val notification = NotificationCompat.Builder(this, channelId)
+//            .setSmallIcon(R.drawable.ic_notification)
+//            .setContentTitle(
+//                getString(
+//                    R.string.notification_exception,
+//                )
+//            )
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//            .build()
+//
+//        NotificationManagerCompat.from(this)
+//            .notify(Random.nextInt(100_000), notification)
+//    }
 }
 
 enum class Action {
