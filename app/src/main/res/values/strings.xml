@@ -35,5 +35,5 @@
     <string name="empty_post">Empty post</string>
     <string name="add_post">Add post</string>
     <string name="empty_posts">empty_posts</string>
-    <string name="error_service">Пошло что-то не так, обновите приложение!</string>
+    <string name="error_service">Something went wrong, update the app!!</string>
 </resources>

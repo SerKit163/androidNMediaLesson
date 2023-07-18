@@ -22,4 +22,5 @@
     <string name="empty_post">Пустой пост</string>
     <string name="add_post">Добавить пост</string>
     <string name="empty_posts">Пустые посты</string>
+    <string name="error_service">Пошло что-то не так, обновите приложение!</string>
 </resources>
