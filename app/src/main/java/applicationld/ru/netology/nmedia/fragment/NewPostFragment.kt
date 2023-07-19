@@ -63,21 +63,19 @@ class NewPostFragment : Fragment() {
                     videoArg?.let(videoPost::setText)
                 }
 
-                btnAdd.setOnClickListener {
+                ok.setOnClickListener {
                     viewModel.changeContent(textPost.text.toString())
                     viewModel.save()
                     AndroidUtils.hideKeyboard(requireView())
-
-//                  Что бы кнопка исчезала
-                    viewModel.postCreatedLoading.observe(viewLifecycleOwner) {
-                        binding.btnAdd.isEnabled = !it
-                    }
-
                 }
 
                 viewModel.postCreated.observe(viewLifecycleOwner) {
                     viewModel.loadPosts()
                     findNavController().navigateUp()
+                }
+
+                viewModel.postCreatedLoading.observe(viewLifecycleOwner) {
+                    binding.ok.isEnabled = !it
                 }
 
             }

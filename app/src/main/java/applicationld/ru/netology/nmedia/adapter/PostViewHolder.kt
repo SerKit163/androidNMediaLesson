@@ -21,9 +21,13 @@ class PostViewHolder(
 
     fun bind(post: Post) {
         binding.apply {
+//            titleHeader.text = post.author
             titleHeader.text = post.author
             dataHeader.text = post.published
             textContent.text = post.content
+
+
+
 
             val urlAvatars = "http://10.0.2.2:9999/avatars/${post.authorAvatar}"
             val urlPostImage = "http://10.0.2.2:9999/images/${post.attachment?.url}"

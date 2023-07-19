@@ -15,6 +15,7 @@ import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0,
+//    authorId = 0,
     author = "",
     authorAvatar = "",
     content = "",
@@ -79,7 +80,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //                    _data.postValue(FeedModel(error = true))
                     }
                 })
-                _postCreated.value = Unit
+//                _postCreated.value = Unit
             } catch (e: Exception) {
                 _postCreatedError.value = Unit
             } finally {
